@@ -14,13 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
-// Route::group(['middleware' => 'admin'], function() {
-	Route::resource('employee'	, 'EmployeeController');
-	Route::Get('salary/{id}/add'	, 'SalaryController@create');
-	Route::post('salary', 'SalaryController@store')->name('salary.store');
-	Route::get('sallary', 'SalaryController@index')->name('salary.index');
-	Route::Get('bonus/{id}/edit'	, 'SalaryController@edit');
-	Route::post('bonus/{id}'	, 'SalaryController@update')->name('bonuc.update');
 
 
 // });
@@ -28,3 +21,28 @@ Route::get('/', function () {
 
 
 	Route::get('/home', 'HomeController@index')->name('home');
+
+    
+
+	//category routes
+            Route::resource('categories', 'Dashboard\CategoryController')->except(['show']);
+  //tenders routes
+            Route::resource('tenders', 'Dashboard\TenderController')->except(['show']);          
+
+   	//category routes
+            Route::resource('sub_categories', 'Dashboard\CategorySubController')->except(['show']);
+           Route::get('GetSubCategory/{category}', 'Dashboard\CategoryController@GetSubCategory')->name('category.sub');
+           Route::get('Getproducts/{product}', 'Dashboard\ProductController@GetSubCategoryProduct')->name('sub.product');
+   //product routes
+            Route::resource('products', 'Dashboard\ProductController')->except(['show']);
+
+
+    //client routes
+            Route::resource('clients', 'Dashboard\ClientController')->except(['show']);
+            Route::resource('clients.orders', 'Dashboard\Client\OrderController')->except(['show']);
+
+            //order routes
+            Route::resource('orders', 'Dashboard\OrderController');
+            Route::get('/orders/{order}/products', 'Dashboard\OrderController@products')->name('orders.products');
+        
+            

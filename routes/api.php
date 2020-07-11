@@ -18,5 +18,4 @@ use Illuminate\Http\Request;
 // });
 
 
-	Route::post('/salary','api\SalaryController@sum_salary');
 
